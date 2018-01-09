@@ -4,7 +4,7 @@
 local this_blue='000'
 local this_green='047'
 local this_black='016'
-local this_red='196'
+local this_red='009'
 local this_yellow='190'
 local this_white='015'
 local this_cyan='087'

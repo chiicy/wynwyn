@@ -9,6 +9,7 @@ local this_yellow='190'
 local this_white='015'
 local this_cyan='087'
 
+NEWLINE=$'\n'
 
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
@@ -72,9 +73,23 @@ function _git_branch() {
 }
 
 
+VIRTUAL_ENV_DISABLE_PROMPT=true
+
+function _virtual_env() {
+    if [[ -n $VIRTUAL_ENV ]]; then
+        echo "${NEWLINE}(env: ${VIRTUAL_ENV:t})"
+    else
+        echo ""
+    fi
+}
+
+
 local user_string='%{$terminfo[bold]$FG[$this_blue]%}%n@%m%{$reset_color%}'
 local path_string='%{$terminfo[bold]%}:%~%{$reset_color%}'
 local branch_string='$(_git_branch)%{$reset_color%}'
+local virtual_env='$(_virtual_env)%{$reset_color%}'
 
-PROMPT="${user_string}${path_string}${branch_string}$: "
+
+PROMPT="${virtual_env}${NEWLINE}${user_string}${path_string}${branch_string}${NEWLINE}$: "
+
 

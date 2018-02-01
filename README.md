@@ -2,8 +2,12 @@
 A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme which comes bundled by default.
 
 ## Enabling
-1. Download the `tristan.zsh-theme file`
-2. Copy the theme to `~/.oh-my-zsh/themes/`
+1. Clone this repository.
+2. Create a symlink to the tristan.zsh-theme file in `~/.oh-my-zsh/custom/themes/` directory. 
+```zsh
+ln -s $PWD/tristan.zsh-theme ~/.oh-my-zsh/custom/themes/tristan.zsh-theme
+```
+(assuming you are in the directory, so `$PWD` will expand correctly)
 3. In your `.zshrc` file, set `ZSH_THEME="tristan"`
 
 ## Customising

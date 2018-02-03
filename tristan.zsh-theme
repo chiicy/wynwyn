@@ -123,8 +123,9 @@ local user_string='%{$terminfo[bold]$FG[$USER_STRING_COLOR]%}%n@%m%{$reset_color
 local path_string='%{$terminfo[bold]%}:%~%{$reset_color%}'
 local branch_string='$(_git_branch)%{$reset_color%}'
 local virtual_env='$(_virtual_env)%{$reset_color%}'
+local caret='%{$FG[$CARETCOLOR]%}\$: %{$reset_color%}'
 
 
-PROMPT="${virtual_env}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}\$: "
+PROMPT="${virtual_env}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
 RPROMPT="$(_git_time_since_commit)"
 

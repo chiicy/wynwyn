@@ -27,19 +27,17 @@ function _git_time_since_commit() {
     minutes=$((seconds_since_last_commit / 60))
     hours=$((seconds_since_last_commit/3600))
 
-    # Sub-hours and sub-minutes
-    days=$((seconds_since_last_commit / 86400))
-    sub_hours=$((hours % 24))
-    sub_minutes=$((minutes % 60))
-
     if [ $hours -gt 24 ]; then
+      days=$((seconds_since_last_commit / 86400))
       commit_age="${days}d"
-      if [ "${days}" -gt '5' ]; then
+      if [ $days -gt 5 ]; then
         color=$RED
       else
         color=$YELLOW
       fi
     elif [ $minutes -gt 60 ]; then
+      sub_hours=$((hours % 24))
+      sub_minutes=$((minutes % 60))
       commit_age="${sub_hours}h${sub_minutes}m"
       color=$WHITE
     else
@@ -133,6 +131,12 @@ function _git_status_indicator() {
         [[ "$is_ahead" == true ]] && branch_status="$branch_ahead"
         [[ "$is_behind" == true ]] && branch_status="$branch_behind"
     fi
+
+    if [[ "$git_status" == "" ]]; then
+        git_status="%{$FG[$GREEN]%}✔%{$reset_color%}"
+    else:
+        git_status="%{$FG[$RED]%}$git_status%{$reset_color%}"
+    fi
     echo " %{$FG[$RED]%}$git_status%{$reset_color%}%{$FG[$PINK]%}$branch_status%{$reset_color%}"
 
 }
@@ -146,11 +150,6 @@ else
   USER_STRING_COLOR="${BLUE}"
 fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[$GREEN]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-
-ZSH_THEME_GIT_PROMPT_DIRTY="$(_git_status_indicator)"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[$GREEN]%}✔%{$reset_color%}"
 
 LEFT_BRACKET="%{$terminfo[bold]$FG[$BLACK]%}[%{$reset_color%}"
 RIGHT_BRACKET="%{$terminfo[bold]$FG[$BLACK]%}]%{$reset_color%}"
@@ -158,7 +157,15 @@ RIGHT_BRACKET="%{$terminfo[bold]$FG[$BLACK]%}]%{$reset_color%}"
 function _git_branch() {
     if [[ -n $(git_prompt_info) ]]; then
         git_icon="%{$FG[$BLACK]%}${i_dev_git}%{$reset_color%}"
-        echo " ${LEFT_BRACKET}${git_icon} $(git_prompt_info)${RIGHT_BRACKET}"
+        branch_name=$(command git symbolic-ref --short HEAD 2> /dev/null)
+        branch_string="%{$FG[$GREEN]%}${branch_name}%{$reset_color%}"
+        if [[ "$branch_name" == 'master' ]]; then
+            branch_icon="%{$FG[$PINK]%}${i_dev_git_commit}%{$reset_color%}"
+        else
+            branch_icon="%{$FG[$PINK]%}${i_dev_git_branch}%{$reset_color%}"
+        fi
+        echo " ${LEFT_BRACKET}${git_icon} ${branch_icon} ${branch_string}$(_git_status_indicator)${RIGHT_BRACKET}"
+    
     else
         echo ""
     fi

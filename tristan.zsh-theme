@@ -1,13 +1,15 @@
 # tristan zsh theme
 
 # colour scheme
-local this_blue='000'
-local this_green='047'
-local this_black='016'
-local this_red='009'
-local this_yellow='190'
-local this_white='015'
-local this_cyan='087'
+BLUE='000'
+GREEN='047'
+BLACK='016'
+RED='009'
+YELLOW='190'
+WHITE='015'
+CYAN='087'
+PINK='197'
+PURPLE='097'
 
 NEWLINE=$'\n'
 
@@ -32,41 +34,53 @@ function _git_time_since_commit() {
 
     if [ $hours -gt 24 ]; then
       commit_age="${days}d"
+      if [ "${days}" -gt '5' ]; then
+        color=$RED
+      else
+        color=$YELLOW
+      fi
     elif [ $minutes -gt 60 ]; then
       commit_age="${sub_hours}h${sub_minutes}m"
+      color=$WHITE
     else
       commit_age="${minutes}m"
+      color=$BLUE
     fi
 
-    color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-    echo "$color$commit_age%{$reset_color%}"
+    echo "%{$FG[$color]%}$commit_age%{$reset_color%}"
   fi
 }
 
 
 if [[ $USER == "root" ]]; then
-  CARETCOLOR="red"
+  CARETCOLOR="${RED}"
+  USER_STRING_COLOR="${RED}"
 else
   CARETCOLOR="white"
+  USER_STRING_COLOR="${BLUE}"
 fi
 
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[$this_green]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[$GREEN]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$FG[$this_red]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[$this_green]%}✔%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$FG[$this_green]%}✚ "
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[$this_yellow]%}⚑ "
-ZSH_THEME_GIT_PROMPT_DELETED="%{$FG[$this_red]%}✖ "
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$FG[$this_blue]%}▴ "
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$FG[$this_cyan]%}§ "
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[$this_white]%}◒ "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$FG[$RED]%}✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[$GREEN]%}✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$FG[$GREEN]%}✚ "
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[$YELLOW]%}⚑ "
+ZSH_THEME_GIT_PROMPT_DELETED="%{$FG[$RED]%}✖ "
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$FG[$BLUE]%}▴ "
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$FG[$CYAN]%}§ "
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[$WHITE]%}◒ "
 
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$FG[GREEN]%}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$FG[YELLO]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$FG[RED]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$FG[WHITE]%}"
 
 function _git_branch() {
     if [[ -n $(git_prompt_info) ]]; then
-        echo " [$(git_prompt_info)]"
+        echo " %{$FG[$BLACK]%}[${i_dev_git}%{$reset_color%} $(git_prompt_info)%{$FG[$BLACK]%}]%{$reset_color%}"
     else
         echo ""
     fi
@@ -77,19 +91,37 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 
 function _virtual_env() {
     if [[ -n $VIRTUAL_ENV ]]; then
-        echo "${NEWLINE}(env: ${VIRTUAL_ENV:t})"
+        echo "${NEWLINE}(%{$FG[$YELLOW]%}${i_dev_python}%{$reset_color%}: ${VIRTUAL_ENV:t})"
     else
         echo ""
     fi
 }
 
+case `uname` in
+    Darwin)
+        OS_ICON="%{$FG[$BLACK]%}${i_dev_apple}%{$reset_color%}"
+        ;;
+    Linux)
+        if [[ -n "cat /proc/version | grep ubuntu" ]]; then
+            OS_ICON="%{$FG[$PURPLE]%}${i_dev_ubuntu}%{$reset_color%}"
+        elif [[ -n "cat /proc/version | grep rasbian" ]]; then
+            OS_ICON="%{$FG[$PINK]%}${i_dev_ubuntu}%{$reset_color%}"
+        else
+            OS_ICON="%{$FG[$BLACK]%}${i_dev_linux}%{$reset_color%}"
+        fi
+        ;;
+    *)
+        OS_ICON=''
+        ;;
+esac
 
-local user_string='%{$terminfo[bold]$FG[$this_blue]%}%n@%m%{$reset_color%}'
+
+local user_string='%{$terminfo[bold]$FG[$USER_STRING_COLOR]%}%n@%m%{$reset_color%}'
 local path_string='%{$terminfo[bold]%}:%~%{$reset_color%}'
 local branch_string='$(_git_branch)%{$reset_color%}'
 local virtual_env='$(_virtual_env)%{$reset_color%}'
 
 
-PROMPT="${virtual_env}${NEWLINE}${user_string}${path_string}${branch_string}${NEWLINE}$: "
-
+PROMPT="${virtual_env}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}\$: "
+RPROMPT="$(_git_time_since_commit)"
 

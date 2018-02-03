@@ -1,5 +1,5 @@
 # Oh-My-ZSH Custom Theme
-A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme which comes bundled by default.
+A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme which comes bundled by default and a few things from Spaceship prompt (https://github.com/denysdovhan/spaceship-prompt).
 
 ## Enabling
 1. Clone this repository.

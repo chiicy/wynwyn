@@ -78,9 +78,12 @@ ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$FG[YELLO]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$FG[RED]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$FG[WHITE]%}"
 
+LEFT_BRACKET="%{$terminfo[bold]$FG[$BLACK]%}[%{$reset_color%}"
+RIGHT_BRACKET="%{$terminfo[bold]$FG[$BLACK]%}]%{$reset_color%}"
+
 function _git_branch() {
     if [[ -n $(git_prompt_info) ]]; then
-        echo " %{$FG[$BLACK]%}[${i_dev_git}%{$reset_color%} $(git_prompt_info)%{$FG[$BLACK]%}]%{$reset_color%}"
+        echo " ${LEFT_BRACKET}%{$FG[$BLACK]%}${i_dev_git}%{$reset_color%} $(git_prompt_info)${RIGHT_BRACKET}"
     else
         echo ""
     fi
@@ -91,7 +94,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 
 function _virtual_env() {
     if [[ -n $VIRTUAL_ENV ]]; then
-        echo "${NEWLINE}(%{$FG[$YELLOW]%}${i_dev_python}%{$reset_color%}: ${VIRTUAL_ENV:t})"
+        echo "${NEWLINE}${LEFT_BRACKET}%{$FG[$YELLOW]%}${i_dev_python}%{$reset_color%}: ${VIRTUAL_ENV:t}${RIGHT_BRACKET}"
     else
         echo ""
     fi

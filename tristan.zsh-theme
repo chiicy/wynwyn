@@ -160,6 +160,7 @@ function _git_branch() {
         else
             branch_status=''
         fi
+        branch_status="%{$FG[$PINK]%}$branch_status%{$reset_color%}"
 
         if [[ "$git_status" == "" ]]; then
             git_status="%{$FG[$GREEN]%}✔%{$reset_color%}"

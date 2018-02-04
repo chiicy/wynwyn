@@ -178,7 +178,25 @@ function _git_branch() {
 VIRTUAL_ENV_DISABLE_PROMPT=true
 function _virtual_env() {
     if [[ -n $VIRTUAL_ENV ]]; then
-        echo "${NEWLINE}${LEFT_BRACKET}%{$FG[$YELLOW]%}${i_dev_python}%{$reset_color%}: ${VIRTUAL_ENV:t}${RIGHT_BRACKET}"
+        echo "${LEFT_BRACKET}%{$FG[$YELLOW]%}${i_dev_python}:%{$reset_color%} ${VIRTUAL_ENV:t}${RIGHT_BRACKET}"
+    else
+        echo ""
+    fi
+}
+
+# display the names of number of currently running docker containers if in a project which uses docker
+function _docker() {
+    if [[ -f Dockerfile || -f docker-compose.yml ]]; then
+        current_containers=$(command docker ps --format="{{.Names}}" | wc -l)
+
+        if [[ $current_containers > 4 ]]; then
+            docker_string="${current_containers} active"
+        elif [[ $current_containers == 0 ]]; then
+            docker_string="no active"
+        else
+            docker_string=$(command docker ps --format="{{.Names}}" | sed -e 'H;${x;s/\n/, /g;s/^,//;p;};d')
+        fi
+        echo "${LEFT_BRACKET}%{$FG[$BLUE]%}${i_dev_docker}:%{$reset_color%} ${docker_string}${RIGHT_BRACKET}"
     else
         echo ""
     fi
@@ -209,9 +227,11 @@ local path_string='%{$terminfo[bold]%}:%~%{$reset_color%}'
 local branch_string='$(_git_branch)%{$reset_color%}'
 local virtual_env='$(_virtual_env)%{$reset_color%}'
 local caret='%{$FG[$CARETCOLOR]%}\$: %{$reset_color%}'
+local docker_string='$(_docker)%{$reset_color%}'
+
 local right_prompt='$(_git_time_since_commit)%{$reset_color%}'
 
 
-PROMPT="${virtual_env}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
+PROMPT="${NEWLINE}${virtual_env}${docker_string}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
 RPROMPT="${right_prompt}"
 

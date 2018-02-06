@@ -187,7 +187,7 @@ function _virtual_env() {
 # display the names of number of currently running docker containers if in a project which uses docker
 function _docker() {
     if [[ -f Dockerfile || -f docker-compose.yml ]]; then
-        current_containers=$(command docker ps --format="{{.Names}}" | wc -l)
+        current_containers=$(command docker ps --format="{{.Names}}" | wc -l | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 
         if [[ $current_containers > 4 ]]; then
             docker_string="${current_containers} active"

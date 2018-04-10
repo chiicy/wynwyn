@@ -10,6 +10,7 @@ WHITE='015'
 CYAN='087'
 PINK='197'
 PURPLE='097'
+DARK_GREEN='002'
 
 NEWLINE=$'\n'
 
@@ -202,6 +203,14 @@ function _docker() {
     fi
 }
 
+function _node() {
+	if [[ -d node_modules || -f package.json ]]; then
+		node_version=$(command node --version)
+		echo "${LEFT_BRACKET}%{$FG[$DARK_GREEN]%}${i_dev_nodejs_small}: %{$reset_color%}${node_version:1}${RIGHT_BRACKET}"
+	else
+		echo ""
+	fi
+}
 # change the icon in the prompt to reflect the os your are using.
 case `uname` in
     Darwin)
@@ -228,10 +237,11 @@ local branch_string='$(_git_branch)%{$reset_color%}'
 local virtual_env='$(_virtual_env)%{$reset_color%}'
 local caret='%{$FG[$CARETCOLOR]%}\$: %{$reset_color%}'
 local docker_string='$(_docker)%{$reset_color%}'
+local node_string='$(_node)%{$reset_color%}'
 
 local right_prompt='$(_git_time_since_commit)%{$reset_color%}'
 
 
-PROMPT="${NEWLINE}${virtual_env}${docker_string}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
+PROMPT="${NEWLINE}${virtual_env}${node_string}${docker_string}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
 RPROMPT="${right_prompt}"
 

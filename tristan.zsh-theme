@@ -71,13 +71,20 @@ function _git_branch() {
     if [[ -n $(git_prompt_info) ]]; then
         git_icon="%{$FG[$BLACK]%}${i_dev_git}%{$reset_color%}"
         branch_name=$(command git symbolic-ref --short HEAD 2> /dev/null)
-        branch_string="%{$FG[$GREEN]%}${branch_name}%{$reset_color%}"
+
+        if [[ -z "$branch_name" ]]; then
+            rebase_status=($(command git status | grep "'.*'" | grep -oP "(?<=').*?(?=')"))
+            rebase_string="%{$FG[$RED]%}${rebase_status[1]}%{$reset_status%}%{$FG[$YELLOW]%} on %{$reset_status%}%{$FG[$RED]%}${rebase_status[3]}%{$reset_status%}"
+            branch_name="%{$FG[$YELLOW]%}REBASING: ${rebase_string}%{$reset_color%}"
+        fi
+
         if [[ "$branch_name" == 'master' ]]; then
             branch_icon="%{$FG[$PINK]%}${i_dev_git_commit}%{$reset_color%}"
         else
             branch_icon="%{$FG[$PINK]%}${i_dev_git_branch}%{$reset_color%}"
         fi
-    
+
+        branch_string="%{$FG[$GREEN]%}${branch_name}%{$reset_color%}"
         untracked='?'
         added='+'
         modified='!'

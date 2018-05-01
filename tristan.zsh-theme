@@ -196,10 +196,9 @@ function _virtual_env() {
 function _docker() {
     if [[ -f Dockerfile || -f docker-compose.yml ]]; then
         current_containers=$(command docker ps --format="{{.Names}}" | wc -l | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-
-        if [[ $current_containers > 4 ]]; then
+        if (( $current_containers > 4 )); then
             docker_string="${current_containers} active"
-        elif [[ $current_containers == 0 ]]; then
+        elif (( $current_containers == 0 )); then
             docker_string="no active"
         else
             docker_string=$(command docker ps --format="{{.Names}}" | sed -e 'H;${x;s/\n/, /g;s/^,//;p;};d')

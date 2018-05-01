@@ -249,6 +249,6 @@ local node_string='$(_node)%{$reset_color%}'
 local right_prompt='$(_git_time_since_commit)%{$reset_color%}'
 
 
-PROMPT="${NEWLINE}${virtual_env}${node_string}${docker_string}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
+PROMPT="${virtual_env}${node_string}${docker_string}${NEWLINE}${OS_ICON} ${user_string}${path_string}${branch_string}${NEWLINE}${caret}"
 RPROMPT="${right_prompt}"
 

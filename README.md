@@ -20,6 +20,38 @@ ln -s $PWD/tristan.zsh-theme ~/.oh-my-zsh/custom/themes/tristan.zsh-theme
 
 3. In your `.zshrc` file, set `ZSH_THEME="tristan"`
 
+## Features
+This theme currently supports the following features:
+
+### Git status
+Shows:
+* Branch name
+* Icon to show if branch has diverged from it's origin
+* Indicators for different git changes (new file added, existing file changed, stashed files etc)
+* Last commit time
+
+### Docker container list
+If you're in a directory that contains a `Dockerfile` or `docker-compose.yml` you will see the docker indicator.
+This will display the names of any currently running containers or if there are more than 4 active it will show the number currently running. 
+
+### Node projects
+If you're in a directory that contains a `node_modules` directory it will show the current version of node being used.
+
+### Python projects
+When you activate a pythong virtual environment it will show the environment name.
+
+### Operating system icon
+Displays an icon specific to the operating system you're currently using.
+For example if I ssh into my home PC from my work macbook, my prompt would look like:
+
+Currently supports:
+* macOS
+* Ubuntu
+* Rasbian
+
+### Root user warning
+If you're logged in as the root user, your prompt will keep you reminded.
+
 ## Customising
 The colours used by this theme have been set to local variables so they can be used in multiple places.
 If you want to replace any colours with ones you prefer, you can set your own values in the colour scheme section at the top of the file.

@@ -1,5 +1,14 @@
-# Oh-My-ZSH Custom Theme
-A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme which comes bundled by default and a few things from Spaceship prompt (https://github.com/denysdovhan/spaceship-prompt).
+<h1 align="center">wynwyn oh-my-zsh theme</h1>
+
+<p align="center">
+  <em>What you need, when you need (it).</em>
+</p>
+
+A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme that comes bundled by default and a few ideas from (Spaceship prompt)[https://github.com/denysdovhan/spaceship-prompt].
+It aims to show you what you want to see, when you need to see it.
+
+## Preview
+
 
 ## Requirements
 1. You will need a [Nerd Font](https://github.com/ryanoasis/nerd-fonts) installed for the icons used in the theme to display properly.
@@ -12,13 +21,13 @@ Follow the instructions in the Nerd Font projet to install a patched fon't for y
 ## Enabling
 1. Clone this repository.
 
-2. Create a symlink to the tristan.zsh-theme file in `~/.oh-my-zsh/custom/themes/` directory. 
+2. Create a symlink to the wynwyn.zsh-theme file in `~/.oh-my-zsh/custom/themes/` directory. 
 ```zsh
-ln -s $PWD/tristan.zsh-theme ~/.oh-my-zsh/custom/themes/tristan.zsh-theme
+ln -s $PWD/wynwyn.zsh-theme ~/.oh-my-zsh/custom/themes/wynwyn.zsh-theme
 ```
 (assuming you are in the directory, so `$PWD` will expand correctly)
 
-3. In your `.zshrc` file, set `ZSH_THEME="tristan"`
+3. In your `.zshrc` file, set `ZSH_THEME="wynwyn"`
 
 ## Features
 This theme currently supports the following features:

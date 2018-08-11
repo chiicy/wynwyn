@@ -4,7 +4,7 @@
   <em>What you need, when you need (it).</em>
 </p>
 
-A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme that comes bundled by default and a few ideas from (Spaceship prompt)[https://github.com/denysdovhan/spaceship-prompt].
+A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme that comes bundled by default and a few ideas from [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt).
 It aims to show you what you want to see, when you need to see it.
 
 ## Preview

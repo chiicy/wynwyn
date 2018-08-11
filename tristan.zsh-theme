@@ -73,7 +73,7 @@ function _git_branch() {
         branch_name=$(command git symbolic-ref --short HEAD 2> /dev/null)
 
         if [[ -z "$branch_name" ]]; then
-            rebase_status=($(command git status | grep "'.*'" | grep -oP "(?<=').*?(?=')"))
+            rebase_status=($(command git status | ggrep "'.*'" | ggrep -oP "(?<=').*?(?=')"))
             rebase_string="%{$FG[$RED]%}${rebase_status[1]}%{$reset_status%}%{$FG[$YELLOW]%} on %{$reset_status%}%{$FG[$RED]%}${rebase_status[3]}%{$reset_status%}"
             branch_name="%{$FG[$YELLOW]%}REBASING: ${rebase_string}%{$reset_color%}"
         fi

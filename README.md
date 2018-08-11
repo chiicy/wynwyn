@@ -1,11 +1,10 @@
-<h1 align="center">wynwyn oh-my-zsh theme</h1>
-
+<h1 align="center">wynwyn.zsh-theme</h1>
 <p align="center">
   <em>What you need, when you need (it).</em>
 </p>
 
-A theme for oh-my-zsh which borrows (reads, just straight up copies) a number of things from the default 'avit' theme that comes bundled by default and a few ideas from [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt).
-It aims to show you what you want to see, when you need to see it.
+A theme for oh-my-zsh that aims to show you the information you need at the time you need it.
+`wynwyn` takes inspiration from the deault theme `avit` and the excellent [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt). 
 
 ## Preview
 

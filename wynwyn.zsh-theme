@@ -1,7 +1,7 @@
 # tristan zsh theme
 
 # colour scheme
-BLUE='000'
+BLUE='039'
 GREEN='047'
 BLACK='016'
 RED='009'

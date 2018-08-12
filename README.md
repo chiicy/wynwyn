@@ -38,16 +38,16 @@ Shows:
 * Icon to show if branch has diverged from it's origin
 * Last commit time
 * Indicators for different git changes:
-- untracked='?'
-- added='+'
-- modified='!'
-- renamed='>>'
-- deleted='✘'
-- stashed='$'
-- unmerged='='
-- branch_ahead='⇡'
-- branch_behind='⇣'
-- branch_diverged='⇕'
+	- untracked='?'
+	- added='+'
+	- modified='!'
+	- renamed='>>'
+	- deleted='✘'
+	- stashed='$'
+	- unmerged='='
+	- branch_ahead='⇡'
+	- branch_behind='⇣'
+	- branch_diverged='⇕'
 
 ### Docker container list
 ![docker container names](screenshots/docker-environment.png)

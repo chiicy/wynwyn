@@ -32,32 +32,50 @@ ln -s $PWD/wynwyn.zsh-theme ~/.oh-my-zsh/custom/themes/wynwyn.zsh-theme
 This theme currently supports the following features:
 
 ### Git status
+![git status indicators](screenshots/git-status.png)
 Shows:
 * Branch name
 * Icon to show if branch has diverged from it's origin
-* Indicators for different git changes (new file added, existing file changed, stashed files etc)
 * Last commit time
+* Indicators for different git changes:
+- untracked='?'
+- added='+'
+- modified='!'
+- renamed='>>'
+- deleted='✘'
+- stashed='$'
+- unmerged='='
+- branch_ahead='⇡'
+- branch_behind='⇣'
+- branch_diverged='⇕'
 
 ### Docker container list
+![docker container names](screenshots/docker-environment.png)
 If you're in a directory that contains a `Dockerfile` or `docker-compose.yml` you will see the docker indicator.
 This will display the names of any currently running containers or if there are more than 4 active it will show the number currently running. 
+![more than 4 docker containers](screenshots/docker-environment-many.png)
 
 ### Node projects
+![node environment](screenshots/node-environment.png)
 If you're in a directory that contains a `node_modules` directory it will show the current version of node being used.
 
 ### Python projects
-When you activate a pythong virtual environment it will show the environment name.
+![python virtual environment](screenshots/python-virtual-env.png)
+When you activate a python virtual environment it will show the environment name.
 
 ### Operating system icon
 Displays an icon specific to the operating system you're currently using.
 For example if I ssh into my home PC from my work macbook, my prompt would look like:
+![operating system logo](screenshots/operating-system-logo.png)
 
 Currently supports:
 * macOS
 * Ubuntu
-* Rasbian
+
+Note: For this to work you need to have this theme set on the computers you ssh into.
 
 ### Root user warning
+![root user](screenshots/root-login.png)
 If you're logged in as the root user, your prompt will keep you reminded.
 
 ## Customising

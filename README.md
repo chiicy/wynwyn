@@ -7,7 +7,7 @@ A theme for oh-my-zsh that aims to show you the information you need at the time
 `wynwyn` takes inspiration from the deault theme `avit` and the excellent [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt). 
 
 ## Preview
-
+![main preview](screenshots/preview.png)
 
 ## Requirements
 1. You will need a [Nerd Font](https://github.com/ryanoasis/nerd-fonts) installed for the icons used in the theme to display properly.
